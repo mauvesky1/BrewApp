@@ -9,6 +9,7 @@ class Test_Methods(unittest.TestCase):
   @patch("functions.get_dict_table_width")
   def print_dict_table(title, data, mock_get_dict_table_width):
     width = get_dict_table_width(title, data)
+    mock_
     print_header(title, width)
     for value in data.values():
         print(f"| {value}")
