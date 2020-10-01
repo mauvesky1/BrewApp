@@ -1,0 +1,9 @@
+*notes*
+*__pycache__*
+.vscode
+venv
+Unused
+.pytest_cache
+.env
+iv
+ETL
