@@ -1,12 +1,12 @@
 import csv
-import saving_class
+import src.saving_class as saving_class
 import sys
 sys.path.append('/home/bob/gen/Two/sources')
 sys.path.append('/home/bob/gen/Two/persistence')
 
-from functions import print_dict_table, print_table, print_header, print_separator, get_dict_table_width, get_table_width, print_menu, get_selection, wait
+from src.functions import print_dict_table, print_table, print_header, print_separator, get_dict_table_width, get_table_width, print_menu, get_selection, wait
 
-from classes import Round, Person
+from src.classes import Round, Person
 #Adding a Comment
 #Another Comment
 people_dict = {}
@@ -51,34 +51,40 @@ def start_app():
 
     if option == 1:
       people = saving_class.Save_load()
-      people.list_csv("people")
+      #people.list_csv("people")
+      people.list_from_database("person")
 
     elif option == 2:
         drinks = saving_class.Save_load()
-        drinks.list_csv("drinks")
+        #drinks.list_csv("drinks")
+        drinks.list_from_database("drink")
 
     elif option == 3:
         new_person = saving_class.Save_load()
-        new_person.save_to_csv("people")
+        #new_person.save_to_csv("people")
+        new_person.save_to_database("persons")
 
     elif option == 4:
         new_person = saving_class.Save_load()
-        new_person.save_to_csv("drinks")
+        #new_person.save_to_csv("drinks")
+        new_person.save_to_database("drinks")
   
 
 
     elif option == 5:
-        print("Choose the number that corresponds with the name you wish to select")
+        new_interaction = saving_class.Save_load()
+        new_interaction.choose_favourite_drink()
+        # print("Choose the number that corresponds with the name you wish to select")
       
-        for key, value in people_dict.items():
-            print(f"{key} {value}")
-        person = people_dict[int(input("Enter here "))]
-        for key, value in drinks_dict.items():
-            print(f"{key} {value}")
+        # for key, value in people_dict.items():
+        #     print(f"{key} {value}")
+        # person = people_dict[int(input("Enter here "))]
+        # for key, value in drinks_dict.items():
+        #     print(f"{key} {value}")
 
-        favourite_drinks[person] = drinks_dict[
-            int(input("Enter the numerical value of the drink you wish to select "))
-        ]
+        # favourite_drinks[person] = drinks_dict[
+        #     int(input("Enter the numerical value of the drink you wish to select "))
+        # ]
 
     elif option == 6:
         width = get_dict_table_width("Favourite Drinks", favourite_drinks)

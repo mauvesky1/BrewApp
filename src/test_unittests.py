@@ -59,12 +59,6 @@ class Test_Methods(unittest.TestCase):
 #####################################################
 
 
-  # @patch("builtins.print")
-  # def test_print_separator(self, mock_print):
-  #   width = 11
-  #   mock_print.return_value = print(f"+{'=' * width}")
-  #  self.assert(mock)
-
 
 if __name__ == "__main__":
     unittest.main()

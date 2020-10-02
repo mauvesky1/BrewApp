@@ -1,4 +1,4 @@
-from functions import wait, print_dict_table
+from src.functions import wait, print_dict_table
 import csv
 
 class Round:
