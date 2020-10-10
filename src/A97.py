@@ -7,32 +7,31 @@ sys.path.append('/home/bob/gen/Two/persistence')
 from src.functions import print_dict_table, print_table, print_header, print_separator, get_dict_table_width, get_table_width, print_menu, get_selection, wait
 
 from src.classes import Round, Person
-#Adding a Comment
-#Another Comment
+
 people_dict = {}
 drinks_dict = {}
 favourite_drinks = {}
 
-people_file = open("/home/bob/gen/Two/persistence/people.csv", "r+")
-drinks_file = open("/home/bob/gen/Two/persistence/drinks.txt", "r+")
+# people_file = open("/home/bob/gen/Two/persistence/people.csv", "r+")
+# drinks_file = open("/home/bob/gen/Two/persistence/drinks.txt", "r+")
 
-people_lines = people_file.readlines()
-drinks_lines = drinks_file.readlines()
+# people_lines = people_file.readlines()
+# drinks_lines = drinks_file.readlines()
 
-try:
-    for i, person in enumerate(people_lines):
-        person = person.strip()
+# try:
+#     for i, person in enumerate(people_lines):
+#         person = person.strip()
         
-        people_dict[i] = person.split(",")[0]
-        print(people_dict[i])
+#         people_dict[i] = person.split(",")[0]
+#         #print(people_dict[i])
 
-    for i, drink in enumerate(drinks_lines):
-        drink = drink.strip()
-        drinks_dict[i] = drink
+#     for i, drink in enumerate(drinks_lines):
+#         drink = drink.strip()
+#         drinks_dict[i] = drink
 
-except:
-    people_file.close()
-    drinks_file.close()
+# except:
+#     people_file.close()
+#     drinks_file.close()
 
 def start_app():
  while True:
@@ -68,46 +67,37 @@ def start_app():
         new_person = saving_class.Save_load()
         #new_person.save_to_csv("drinks")
         new_person.save_to_database("drinks")
-  
-
 
     elif option == 5:
         new_interaction = saving_class.Save_load()
         new_interaction.choose_favourite_drink()
-        # print("Choose the number that corresponds with the name you wish to select")
-      
-        # for key, value in people_dict.items():
-        #     print(f"{key} {value}")
-        # person = people_dict[int(input("Enter here "))]
-        # for key, value in drinks_dict.items():
-        #     print(f"{key} {value}")
-
-        # favourite_drinks[person] = drinks_dict[
-        #     int(input("Enter the numerical value of the drink you wish to select "))
-        # ]
 
     elif option == 6:
+        new_interaction = saving_class.Save_load()
         width = get_dict_table_width("Favourite Drinks", favourite_drinks)
-        print_header("Favourite Drinks", width)
+        print_header("Favourite Drinks", 19 )
        
-        for key, value in favourite_drinks.items():
-            print(f"| {key} {value}")
-        print_separator(width)
+        new_interaction.view_favourite_drinks()
+        # for key, value in favourite_drinks.items():
+        #     print(f"| {key} {value}")
+        print_separator(19)
 
         wait()
     
     elif option == 7:
-        current_round = Round()
-        for key, value in drinks_dict.items():
-            print(f"{key} {value}")
+        new_interaction = saving_class.Save_load()
+        new_interaction.new_round()
+        # current_round = Round()
+        # for key, value in drinks_dict.items():
+        #     print(f"{key} {value}")
         
-        current_round.add_to_order(drinks_dict[
-            int(input("Enter the numerical value of the drink you wish to add to the round "))
-        ])
+        # current_round.add_to_order(drinks_dict[
+        #     int(input("Enter the numerical value of the drink you wish to add to the round "))
+        # ])
     
     elif option == 8:
      
-      if current_round.size() > 3:
+      if current_round.size() > 10:
           print("Sorry, too many drinks")
           wait()
       else:

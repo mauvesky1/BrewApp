@@ -6,8 +6,8 @@ Please select a list:
 [4] Add a drink
 [5] Choose favourite drink
 [6] View favourite drinks
-[7] Start next round
-[8] Add a drink to the order
+[7] Order next round of drinks
+[8] Order Saved Round
 [9] View round
 [11] Exit
 """

@@ -8,3 +8,5 @@ Unused
 iv
 ETL
 dockerfile
+my-notebooks
+init.sql
