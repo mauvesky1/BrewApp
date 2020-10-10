@@ -174,13 +174,14 @@ class Save_load:
     cursor.execute(f"SELECT drink_id, name from drinks;")
     #connection.commit()
     rows = cursor.fetchall()
-    print("List of Drinks:")
-    for row in rows:
+    print("\nPress 0 to exit. \nList of Drinks:")
+    for row in rows[1:]:
     
       print(row[0], ":", row[1]) 
 
     
     drinks_list = [round_owner_id] 
+    print("")
     while True:
       selected_drink = int(input("Please select a drink to add to the round:"))
       if len(drinks_list) > 5:
@@ -199,8 +200,6 @@ class Save_load:
         if tupale[0] == drink:
           print(tupale[1]) 
       #print("looing here", drink)
-
-    
     
     #Santise inputs
     cursor.execute(f"UPDATE persons SET round='{drinks_list}' WHERE person_id={round_owner_id}")
@@ -208,4 +207,48 @@ class Save_load:
     cursor.close()
    
     #print(persons)
+    wait()
+
+  def order_saved_round(self):
+    #Retreive correct round
+    #Print correct round
+
+    connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
+    cursor = connection.cursor()
+    #persons = {}
+
+    cursor.execute(f"SELECT name, round from persons;")
+    #connection.commit()
+    rows = cursor.fetchall()
+    #print(rows)
+    print("Whose round do you wish to order?")
+    for i,row in enumerate(rows):
+      print((i+1),row[0])
+    
+    selection = int(input("Select the number corresponding with the person whose round you wish to select: "))
+    selected_round = []
+    printing_list = []
+    
+    print("You have ordered:")
+    for i,row in enumerate(rows):
+      
+      if i+1 == selection:
+        
+        selected_round = eval(row[1])
+    
+    cursor.execute(f"SELECT drink_id, name from drinks;")
+    rows = cursor.fetchall()
+    #print(rows)
+    for drink in selected_round:
+      for row in rows:
+        
+        if drink == row[0]:
+          
+          printing_list.append(row[1])
+          
+    for item in printing_list:
+      print(item)
+  
+    #connection.commit()
+    cursor.close()
     wait()

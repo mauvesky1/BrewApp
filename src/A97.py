@@ -96,17 +96,9 @@ def start_app():
         # ])
     
     elif option == 8:
+        new_interaction = saving_class.Save_load()
+        new_interaction.order_saved_round()
      
-      if current_round.size() > 10:
-          print("Sorry, too many drinks")
-          wait()
-      else:
-        for key, value in drinks_dict.items():
-            print(f"{key} {value}")
-
-        current_round.add_to_order(drinks_dict[
-            int(input("Enter the numerical value of the drink you wish to select "))
-        ])
 
     elif option == 9:
 
