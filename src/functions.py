@@ -11,8 +11,6 @@ Please select a list:
 [9] Order Everyone a round
 [11] Exit
 """
- # csv writer 
- # demo comment
  
 def print_dict_table(title, data):
     width = get_dict_table_width(title, data)

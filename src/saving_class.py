@@ -59,9 +59,19 @@ class Save_load:
     wait()
   
   def save_to_database(self, table_selector):
-    print(table_selector)
-    connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
-    cursor = connection.cursor()
+    try:
+      print(table_selector)
+      connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
+      cursor = connection.cursor()
+
+    except RuntimeError as e:
+      print("Runtime ERROR, is the database up?", e)
+      wait()
+    except:
+        print("Something went wrong\n", e)
+        cursor.close()
+        exit()
+
     new_name = [input("Input here:  ")]
 
     cursor.execute(f"INSERT INTO {table_selector}(name) VALUES(%s)", new_name)
@@ -75,10 +85,17 @@ class Save_load:
 
   def choose_favourite_drink(self):
     print("Choose the number that corresponds with the name you wish to select")
-
-    connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
-    cursor = connection.cursor()
-    #persons = {}
+    try:
+      connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
+      cursor = connection.cursor()
+    
+    except RuntimeError as e:
+      print("Runtime ERROR, is the database up?")
+      wait()
+    except:
+        print("Something went wrong\n", e)
+        cursor.close()
+        exit()
 
     cursor.execute(f"SELECT person_id, name from persons;")
     #connection.commit()
@@ -105,18 +122,22 @@ class Save_load:
     wait()
 
   def view_favourite_drinks(self):
-    
-    #Load People into a people list
-    #Load favourite_drinks into a favourite drinks list
-    #Substitute favourite drinks with favourite drinks name
-    #Print dictionary
+     
     people_list = []
     drinks_list = []
-    #favourite_drinks_dict = {}
-
-    connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
-    cursor = connection.cursor()
+   
+    try:
+      connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
+      cursor = connection.cursor()
     
+    except RuntimeError as e:
+      print("Runtime ERROR, is the database up?")
+      wait()
+    except:
+        print("Something went wrong\n", e)
+        cursor.close()
+        exit()
+
     cursor.execute(f"SELECT name, favourite_drink from persons;")
    
     connection.commit()
@@ -155,17 +176,19 @@ class Save_load:
     cursor.close()
   
   def new_round(self):
-    #New round of drinks
-    #Select Person as the round owner
-    #"Who is responsible for the round"
-    #Add everyone's favourite drink to round?
-    #Add drinks to the round
-
+    
     print("Choose the number that corresponds with the person you wish to be the round owner.")
-
-    connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
-    cursor = connection.cursor()
-    #persons = {}
+    try:
+        connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
+        cursor = connection.cursor()
+    
+    except RuntimeError as e:
+      print("Runtime ERROR, is the database up?")
+      wait()
+    except:
+        print("Something went wrong\n", e)
+        cursor.close()
+        exit()
 
     cursor.execute(f"SELECT person_id, name from persons;")
     #connection.commit()
@@ -215,12 +238,17 @@ class Save_load:
     wait()
 
   def order_saved_round(self):
-    #Retreive correct round
-    #Print correct round
-
-    connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
-    cursor = connection.cursor()
-    #persons = {}
+    try:
+        connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
+        cursor = connection.cursor()
+    
+    except RuntimeError as e:
+      print("Runtime ERROR, is the database up?")
+      wait()
+    except:
+        print("Something went wrong\n", e)
+        cursor.close()
+        exit()
 
     cursor.execute(f"SELECT name, round from persons;")
     #connection.commit()
@@ -261,10 +289,17 @@ class Save_load:
   def order_favourite_round(self):
     favourite_drinks_list = []
     print_drinks_list = []
-
-    connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
-    cursor = connection.cursor()
-    #persons = {}
+    try:
+      connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
+      cursor = connection.cursor()
+      
+    except RuntimeError as e:
+      print("Runtime ERROR, is the database up?")
+      wait()
+    except:
+        print("Something went wrong\n", e)
+        cursor.close()
+        exit()
 
     cursor.execute(f"SELECT favourite_drink from persons;")
     rows = cursor.fetchall()
