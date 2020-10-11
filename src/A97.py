@@ -8,31 +8,6 @@ from src.functions import print_dict_table, print_table, print_header, print_sep
 
 from src.classes import Round, Person
 
-people_dict = {}
-drinks_dict = {}
-favourite_drinks = {}
-
-# people_file = open("/home/bob/gen/Two/persistence/people.csv", "r+")
-# drinks_file = open("/home/bob/gen/Two/persistence/drinks.txt", "r+")
-
-# people_lines = people_file.readlines()
-# drinks_lines = drinks_file.readlines()
-
-# try:
-#     for i, person in enumerate(people_lines):
-#         person = person.strip()
-        
-#         people_dict[i] = person.split(",")[0]
-#         #print(people_dict[i])
-
-#     for i, drink in enumerate(drinks_lines):
-#         drink = drink.strip()
-#         drinks_dict[i] = drink
-
-# except:
-#     people_file.close()
-#     drinks_file.close()
-
 def start_app():
  while True:
     
@@ -42,8 +17,8 @@ def start_app():
         option = int(input("Message here   "))
     except ValueError as e:
         print(e)
-        print("This is a helpful message explaining that your input was incorrect")
-        exit()
+        print("This is a helpful message explaining that your input must be one of the numbers indicating a menu option")
+        option =  int(input("Message here   "))
     except Exception:
         print("Something went wrong")
         exit()
@@ -101,15 +76,14 @@ def start_app():
      
 
     elif option == 9:
+        new_interaction = saving_class.Save_load()
+        new_interaction.order_favourite_round()
 
-        current_round.view_round()
-        wait()
+        
 
     elif option == 11:
         
         print("Thanks for playing")
-        people_file.close()
-        drinks_file.close()
         exit()
 
     else:

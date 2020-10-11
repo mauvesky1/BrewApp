@@ -8,14 +8,11 @@ Please select a list:
 [6] View favourite drinks
 [7] Order next round of drinks
 [8] Order Saved Round
-[9] View round
+[9] Order Everyone a round
 [11] Exit
 """
  # csv writer 
  # demo comment
-def add(x , y):
-    return  x + y
- 
  
 def print_dict_table(title, data):
     width = get_dict_table_width(title, data)

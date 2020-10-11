@@ -36,10 +36,15 @@ class Save_load:
          wait()
 
   def list_from_database(self, table_selector):
-    
-    connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
-    cursor = connection.cursor()
-    persons = {}
+     
+    try:
+       connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
+       cursor = connection.cursor()
+       persons = {}
+
+    except RuntimeError as e:
+      print("Runtime ERROR, is the database up?")
+      wait()
 
     cursor.execute(f"SELECT {table_selector}_id, name from {table_selector}s")
     connection.commit()
@@ -250,5 +255,36 @@ class Save_load:
       print(item)
   
     #connection.commit()
+    cursor.close()
+    wait()
+  
+  def order_favourite_round(self):
+    favourite_drinks_list = []
+    print_drinks_list = []
+
+    connection = pymysql.connect(host ="localhost", port = 33066, user = "root", password = "password", db = "brew_app")
+    cursor = connection.cursor()
+    #persons = {}
+
+    cursor.execute(f"SELECT favourite_drink from persons;")
+    rows = cursor.fetchall()
+    for row in rows:
+      if row[0] != None:
+        favourite_drinks_list.append(row[0])
+    
+    cursor.execute(f"SELECT drink_id, name from drinks;")
+    rows = cursor.fetchall()
+   
+
+    for drink in favourite_drinks_list:
+      for row in rows:
+        if drink == row[0]:
+          print_drinks_list.append(row[1])
+          break
+
+    print("Every regular has had their favourite drink ordered!\nThe following drinks have been ordered: ")
+    for drink in print_drinks_list:
+      print(drink)
+   
     cursor.close()
     wait()
