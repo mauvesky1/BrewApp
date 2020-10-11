@@ -10,7 +10,7 @@ from src.classes import Round, Person
 
 def start_app():
  while True:
-    
+    new_interaction = saving_class.Save_load()
     print_menu()
     
     try:
@@ -24,62 +24,42 @@ def start_app():
         exit()
 
     if option == 1:
-      people = saving_class.Save_load()
-      #people.list_csv("people")
-      people.list_from_database("person")
+     
+      new_interaction.list_from_database("person")
 
     elif option == 2:
-        drinks = saving_class.Save_load()
-        #drinks.list_csv("drinks")
-        drinks.list_from_database("drink")
+      
+        new_interaction.list_from_database("drink")
 
     elif option == 3:
-        new_person = saving_class.Save_load()
-        #new_person.save_to_csv("people")
-        new_person.save_to_database("persons")
+        
+        new_interaction.save_to_database("persons")
 
     elif option == 4:
-        new_person = saving_class.Save_load()
-        #new_person.save_to_csv("drinks")
-        new_person.save_to_database("drinks")
+       
+        new_interaction.save_to_database("drinks")
 
     elif option == 5:
-        new_interaction = saving_class.Save_load()
+       
         new_interaction.choose_favourite_drink()
 
     elif option == 6:
-        new_interaction = saving_class.Save_load()
-        width = get_dict_table_width("Favourite Drinks", favourite_drinks)
+        width = get_dict_table_width("Favourite Drinks", {})
         print_header("Favourite Drinks", 19 )
        
         new_interaction.view_favourite_drinks()
-        # for key, value in favourite_drinks.items():
-        #     print(f"| {key} {value}")
-        print_separator(19)
 
+        print_separator(19)
         wait()
     
     elif option == 7:
-        new_interaction = saving_class.Save_load()
         new_interaction.new_round()
-        # current_round = Round()
-        # for key, value in drinks_dict.items():
-        #     print(f"{key} {value}")
-        
-        # current_round.add_to_order(drinks_dict[
-        #     int(input("Enter the numerical value of the drink you wish to add to the round "))
-        # ])
-    
+
     elif option == 8:
-        new_interaction = saving_class.Save_load()
         new_interaction.order_saved_round()
-     
 
     elif option == 9:
-        new_interaction = saving_class.Save_load()
-        new_interaction.order_favourite_round()
-
-        
+        new_interaction.order_favourite_round()    
 
     elif option == 11:
         
