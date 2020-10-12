@@ -64,7 +64,7 @@ def start_app():
         elif option == 9:
             new_interaction.order_favourite_round()
 
-        elif option == 11:
+        elif option == 10:
 
             print("Thanks for viewing")
             exit()

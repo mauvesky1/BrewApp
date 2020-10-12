@@ -181,24 +181,19 @@ class Save_load:
 
         drinks_dict = {}
         for a, b in rows:
-            # print(b)
 
             drinks_dict[a] = b
 
-        # Turn tupales into dictionary
         # Replace drinks list with items from dictionary
         for i, drink in enumerate(drinks_list):
             if drink == None:
                 drink = 0
             drinks_list[i] = drinks_dict[drink]
 
-        # favourite_drinks_dict = dict(zip(people_list, drinks_list))[drink]
-
         favourite_drinks_dict = dict(zip(people_list, drinks_list))
-        # print(favourite_drinks_dict)
+
         for row in favourite_drinks_dict.items():
             print("|", row[0], " : ", row[1])
-        # print(favourite_drinks_dict.items())
 
         cursor.close()
 
@@ -258,9 +253,9 @@ class Save_load:
 
         print("Your round has been ordered and saved. It consisted of:")
         for drink in drinks_list[1:]:
-            for tupale in rows:
-                if tupale[0] == drink:
-                    print(tupale[1])
+            for row in rows:
+                if row[0] == drink:
+                    print(row[1])
             # print("looing here", drink)
 
         # Santise inputs

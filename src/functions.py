@@ -9,9 +9,10 @@ Please select a list:
 [7] Order next round of drinks
 [8] Order Saved Round
 [9] Order Everyone a round
-[11] Exit
+[10] Exit
 """
- 
+
+
 def print_dict_table(title, data):
     width = get_dict_table_width(title, data)
     print_header(title, width)

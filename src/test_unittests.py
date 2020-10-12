@@ -1,15 +1,15 @@
-from src.functions import (
-    print_dict_table,
-    get_table_width,
-    get_dict_table_width,
-    print_header,
-    print_separator,
-)
-
+import pytest
 import unittest
 from unittest.mock import Mock, patch, call
 
-from src.classes import Round
+from src.functions import (
+    get_table_width,
+    get_dict_table_width,
+    print_dict_table,
+    print_header,
+    print_menu,
+    print_separator,
+)
 
 
 class Test_Methods(unittest.TestCase):
@@ -22,7 +22,6 @@ class Test_Methods(unittest.TestCase):
         actual = get_table_width(title, data)
 
         self.assertTrue(actual == expected)
-        print("test_get_table_width")
 
     def test_get_table_width_i(self):
 
@@ -34,31 +33,46 @@ class Test_Methods(unittest.TestCase):
 
         self.assertTrue(actual_1 == expected_1)
 
-        print("test_get_table_width_1")
-
-    def test_round_class(self):
-
+    @patch("src.functions.get_dict_table_width")
+    @patch("src.functions.print_header")
+    @patch("src.functions.print_separator")
+    @patch("builtins.print")
+    def test_print_dict_table(
+        self,
+        mock_print,
+        mock_print_separator,
+        mock_print_header,
+        mock_get_dict_table_width,
+    ):
         # Arrange
-        new_round = Round()
+        title = "ti"
+        data = {1: "22", "second string": "timewarp"}
+        mock_get_dict_table_width.return_value = 2
 
-        expected = []
-        # Actual
-        actual = new_round.list_of_drinks
+        expected = [call("| 22"), call("| timewarp")]
+        # Act
+        print_dict_table(title, data)
+
         # Assert
-        self.assertTrue(actual == expected)
-        print("test_round_class")
+        mock_get_dict_table_width.assert_called_once_with(title, data)
+        mock_print_header.assert_called_once_with(title, 2)
+        mock_print_separator.assert_called_once_with(2)
 
-    def test_round_class_i(self):
-        # arrange
-        new_round = Round()
-        new_drink = "Cola"
-        expected = [new_drink]
-        # act
-        new_round.add_to_order(new_drink)
-        actual = new_round.list_of_drinks
-        # assert
-        self.assertTrue(actual == expected)
-        print("test_round_class_i")
+        self.assertEqual(expected, mock_print.call_args_list)
+
+    @patch("builtins.print")
+    def test_print_header(self, mock_print):
+        # Arrange
+        title = "title"
+        width = 5
+
+        expected = [call("====="), call(" ", "title"), call("=====")]
+
+        # Act
+        print_header(title, width)
+
+        # Assert
+        self.assertEqual(expected, mock_print.call_args_list)
 
 
 if __name__ == "__main__":
