@@ -364,7 +364,7 @@ class Save_load:
                     break
 
         print(
-            "Every regular has had their favourite drink ordered!\nThe following drinks have been ordered: "
+            "Everyone with a favourite drink has had it ordered for them!\nThe following drinks have been ordered: "
         )
         for drink in print_drinks_list:
             print(drink)

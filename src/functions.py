@@ -8,7 +8,7 @@ Please select a list:
 [6] View favourite drinks
 [7] Order next round of drinks
 [8] Order Saved Round
-[9] Order every regular patron a round
+[9] Order everyone's favourite drink
 [10] Exit
 """
 
